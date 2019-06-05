@@ -6,3 +6,6 @@
 >> vim /etc/ssh/sshd_config 
 >> 新增一行配置 GatewayPorts clientspecified  
 > 然后本地执行：ssh -R 0.0.0.0:80:localhost:8091 root@39.96.83.46
+
+#### 踢出用户
+pkill -kill -t pts/0
