@@ -1,0 +1,5 @@
+alias vb='vim ~/.bash_profile'
+alias sb='source ~/.bash_profile'
+alias hongkong='ssh -p 996 root@47.75.102.227'
+alias fanqiang='networksetup -setsocksfirewallproxystate "Wi-fi" on;ssh -p 996 -N -g -D 1080 root@47.75.102.227'
+alias liangmin='networksetup -setsocksfirewallproxystate "Wi-fi" off'
