@@ -1,4 +1,4 @@
-package org.hum.scaffold.tools;
+package org.hum.scaffold.http;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

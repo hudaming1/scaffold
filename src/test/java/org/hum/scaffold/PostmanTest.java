@@ -3,7 +3,7 @@ package org.hum.scaffold;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
-import org.hum.scaffold.tools.Postman.HttpRequest;
+import org.hum.scaffold.http.Postman.HttpRequest;
 
 public class PostmanTest {
 
