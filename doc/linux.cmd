@@ -9,3 +9,9 @@
 
 #### 踢出用户
 pkill -kill -t pts/0
+
+#### 免密登录
+> 1. ssh-keygen -t rsa
+> 2. scp /root/.ssh/id_rsa.pub root@192.168.0.2:/root/.ssh/
+> 3. ssh root@192.168.0.2
+> 4. cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys

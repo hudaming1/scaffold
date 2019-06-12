@@ -11,7 +11,7 @@ import java.net.Socket;
 public class HttpSimpleServer {
 
 	static class Config {
-		public static final int PORT = 5432;
+		public static final int PORT = 3389;
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
