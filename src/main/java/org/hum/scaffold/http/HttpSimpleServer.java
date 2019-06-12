@@ -26,11 +26,11 @@ public class HttpSimpleServer {
 				String requestHeader;
 
 				String requestLine = br.readLine();
-				
-				System.out.println("request line:" + requestLine);
-				System.out.println("request header:");
+
+				System.out.println("=========================================");
+				System.out.print(requestLine + "\r\n");
 				while (!(requestHeader = br.readLine()).equals("")) {
-					System.out.println(requestHeader);
+					System.out.print(requestHeader + "\r\n");
 				}
 				System.out.println("=========================================");
 
