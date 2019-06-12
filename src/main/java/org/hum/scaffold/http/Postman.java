@@ -36,14 +36,17 @@ public class Postman {
 			bw.flush();
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));
+
 			String line = null;
 			while (!(line = br.readLine()).equals("")) {
 				response.append(line).append("\n");
 			}
-
-			while (!(line = br.readLine()).equals("")) {
+			
+			while ((line = br.readLine()) != null && !line.equals("")) {
 				response.append(line).append("\n");
 			}
+			
+			
 			return response.toString();
 		}
 	}
