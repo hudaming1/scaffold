@@ -15,3 +15,6 @@ pkill -kill -t pts/0
 > 2. scp /root/.ssh/id_rsa.pub root@192.168.0.2:/root/.ssh/
 > 3. ssh root@192.168.0.2
 > 4. cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+
+#### 统计调用次数
+grep "validateToKen.req" grampus-ccs.log.info | grep "2019-06-12 13" | grep "CcsTokenServiceImpl" | awk -F 'req=' '{print $2}' | awk -F ',' '{print $1}' | sort -n | uniq -c
