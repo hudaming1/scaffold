@@ -1,6 +1,7 @@
 package org.hum.scaffold.tools;
 
 import com.alibaba.dubbo.config.ApplicationConfig;
+import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.config.spring.ReferenceBean;
 
 public class DubboInvokeUitl {
@@ -27,9 +28,17 @@ public class DubboInvokeUitl {
 	public static <T> T getDubboReference(String classType, String url) {
 		ReferenceBean<T> ref = new ReferenceBean<T>();
         ref.setApplication(new ApplicationConfig("HumingTest"));
-        ref.setUrl(url);
+        if (url.startsWith("zookeeper://")) {
+        	ref.setRegistry(new RegistryConfig(url, "zookeeper"));
+        } else {
+        	ref.setUrl(url);
+        }
         ref.setProtocol("dubbo");
         ref.setInterface(classType);
+        // 如果服务端还有其他参数，例如group或version，则需要给ref赋值
+        ref.setVersion(null);
+        ref.setGroup(null);
+        
         return ref.get();
 	}
 	
