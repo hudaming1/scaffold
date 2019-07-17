@@ -5,7 +5,10 @@
 > 先打开46服务器ssh的ip转发配置  
 >> vim /etc/ssh/sshd_config 
 >> 新增一行配置 GatewayPorts clientspecified  
-> 然后本地执行：ssh -R 0.0.0.0:80:localhost:8091 root@39.96.83.46
+>> 新增超时配置：
+ClientAliveCountMax 3600
+ClientAliveInterval 60
+> 然后本地执行：ssh -o ServerAliveInterval=60 -o ServerAliveCountMax=360 -NfR  0.0.0.0:80:localhost:8080 root@129.28.193.172
 
 #### 踢出用户
 pkill -kill -t pts/0
