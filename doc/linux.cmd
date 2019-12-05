@@ -24,3 +24,7 @@ pkill -kill -t pts/0
 
 #### 统计调用次数
 grep "validateToKen.req" grampus-ccs.log.info | grep "2019-06-12 13" | grep "CcsTokenServiceImpl" | awk -F 'req=' '{print $2}' | awk -F ',' '{print $1}' | sort -n | uniq -c
+
+
+#### tcpdump
+tcpdump tcp port 80 and host 36.112.67.195
