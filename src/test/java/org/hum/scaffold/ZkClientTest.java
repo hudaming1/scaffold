@@ -11,7 +11,7 @@ public class ZkClientTest {
 
 	public static void main(String[] args) {
 		ZkClient zkClient = new ZkClient("10.2.3.83:2181");
-		List<String> children = zkClient.getChildren("/testshardingesjob/smartTestJob1/sharding/0");
+		List<String> children = zkClient.getChildren("/testshardingesjob/smartTestJob1/sharding/8");
 		children.forEach(path -> {
 			System.out.println(path);
 		});
