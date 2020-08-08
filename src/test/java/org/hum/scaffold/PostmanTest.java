@@ -54,24 +54,45 @@ public class PostmanTest {
 			"Cookie: accessToken=767fd299-13a3-4101-abdc-536de866b1e8\r\n" +
 			"\r\n";
 	
+
+	
+	static String ZtoCallBack = "POST /poll/zto HTTP/1.1\r\n" + 
+			"Host: express-api.missfresh.cn\r\n" + 
+//			"Host: 39.96.83.46\r\n" + 
+			"Connection: keep-alive\r\n" + 
+			"Content-Length: " + "data=humingtest".getBytes().length + "\r\n" +  
+			"Content-Type: application/x-www-form-urlencoded;charset=UTF-8\r\n\r\n" + 
+			"data=humingtest" + "\r\n";
+	
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		
-		String param = "GET /api/registry-center HTTP/1.1\r\n" + 
-				"Host: esjob-test.missfresh.net\r\n" + 
-				"Connection: keep-alive\r\n" + 
-				"Cache-Control: max-age=0\r\n" + 
-				"Authorization: Basic bWlzc2ZyZXNoUm9vdDEyMzptaXNzZnJlc2hSb290MTIz\r\n" + 
-				"Upgrade-Insecure-Requests: 1\r\n" + 
-				"User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36\r\n" + 
-				"Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3\r\n" + 
-				"Accept-Encoding: gzip, deflate\r\n" + 
-				"Accept-Language: zh-CN,zh;q=0.9\r\n" + 
-				"Cookie: JSESSIONID=17b9qrbe8i91yb6viwhtvaiwv\r\n"
-				+ "\r\n\r\n";
+//		String param = "GET /sms/replenishment/receivingForecast/getlevel1CategoryList HTTP/1.1\n" + 
+//				"Host: wuliu-ocean-gateway.b24.missfresh.net\n" + 
+//				"Connection: keep-alive\n" + 
+//				"deviceId: c3eff745d8f339f17748ce53ea03ec03\n" + 
+//				"Accept: application/json, text/plain, */*\n" + 
+//				"Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzbXNqeHEiLCJ1c2VyX25hbWUiOiJzbXNqeHEiLCJleHAiOjE1OTQyODU1OTcsImlhdCI6MTU5MTYwNzE5N30.1g1C4g6Q4sIynmace65rcMqGp1k-q34CBuOe3-iETzQ\n" + 
+//				"mfsig: mfswVFZZhScrfd8UidRXcWogUEzvQVvOidljhC1OjBcrgEwahVgohdZTSw1oQwWajdMpRd+dVgdSidrOeVopid+nhd1UQv9MXSvVfP0yH3Q\n" + 
+//				"User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36\n" + 
+//				"deviceType: PC\n" + 
+//				"Origin: http://56hub-web-staging.missfresh.net\n" + 
+//				"Referer: http://56hub-web-staging.missfresh.net/\n" + 
+//				"Accept-Language: zh-CN,zh;q=0.9" + 
+//				"\n\n";
 		
+//		String body = "{\"caller\":\"LOGISTICS_SMS\",\"fetchSource\":[],\"index\":\"b5_regular_inventory\",\"page\":1,\"querys\":[{\"column\":\"create_time\",\"condition\":\"gte\",\"connection\":\"filter\",\"value\":[1595809330650]},{\"column\":\"create_time\",\"condition\":\"lte\",\"connection\":\"filter\",\"value\":[1595895730650]},{\"column\":\"warehouse_code\",\"condition\":\"in\",\"connection\":\"filter\",\"value\":[\"MRYX_TEST_1288253601908312\"]}],\"size\":10,\"sorts\":[{\"field\":\"id\",\"order\":\"desc\"}],\"type\":\"_doc\"}";
+		String body = "{\"caller\":\"LOGISTICS_SMS\",\"fetchSource\":[],\"index\":\"b5_regular_inventory\",\"page\":1,\"querys\":[{\"column\":\"create_time\",\"condition\":\"lte\",\"connection\":\"filter\",\"value\":[\"2020-07-28 00:00:00\"]},{\"column\":\"warehouse_code\",\"condition\":\"in\",\"connection\":\"filter\",\"value\":[\"MRYX_TEST_1288253601908312\"]}],\"size\":10,\"sorts\":[{\"field\":\"id\",\"order\":\"desc\"}],\"type\":\"_doc\"}";
+		
+		String param = "POST /search/query HTTP/1.1\n" + 
+				"Host: 10.2.39.13\n" + 
+				"Connection: keep-alive\n" + 
+				"Content-Length: " + body.length() + "\n" + 
+				"Accept: application/json, text/plain, */*\n" + 
+				"Content-Type: application/json;charset=UTF-8\n" + 
+				"Accept-Language: zh-CN,zh;q=0.9\r\n\r\n"
+				+ body;
 
-		
-		String resp = new HttpRequest("esjob-test.missfresh.net").execute(param);
+		String resp = new HttpRequest("10.2.39.13", 30881).execute(param);
 		System.out.println(resp);
 	}
 }

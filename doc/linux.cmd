@@ -11,7 +11,7 @@ ClientAliveInterval 60
 > 然后本地执行：ssh -o ServerAliveInterval=60 -o ServerAliveCountMax=360 -NfR  0.0.0.0:80:localhost:8080 root@129.28.193.172
 
 
-ssh -o ServerAliveInterval=60 -o ServerAliveCountMax=360 -NfR  0.0.0.0:80:localhost:8899 root@129.28.193.172
+ssh -o ServerAliveInterval=60 -o ServerAliveCountMax=360 -NfR  0.0.0.0:52996:10.1.143.145:20886 root@129.28.193.172
 
 #### 踢出用户
 pkill -kill -t pts/0
