@@ -30,3 +30,9 @@ grep "validateToKen.req" grampus-ccs.log.info | grep "2019-06-12 13" | grep "Ccs
 
 #### tcpdump
 tcpdump tcp port 80 and host 36.112.67.195
+tcpdump tcp host 101.201.197.62
+
+#### 查看某一个时段的日志
+sed -n '/起始时间/,/结束时间/p' 日志文件   
+例如：查看2019-12-17 12:00:00-12:10:10 时间段内的日志内容     
+sed -n '/2019-12-17 12:00:00/,/2019-12-17 12:10:10/p'  online.log     
