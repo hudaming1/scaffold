@@ -41,3 +41,7 @@ sed -n '/2019-12-17 12:00:00/,/2019-12-17 12:10:10/p'  online.log
 ####nc上传下载文件
 服务端：nc -4 -l [port] < 123.log
 客户端：nc -4 [remote_host] [remote_port] > 123.log
+
+####jrebel
+http://jrebel.cicoding.cn/guid  
+http://jrebel.cicoding.cn/C2709474-8C0E-B086-C917-D8D6733C9EBC
