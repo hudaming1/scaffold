@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -14,16 +15,20 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.HttpClients;
 
 public class DownloadFactory implements Runnable {
 
-	private static final String SAVE_DIR = "/Users/hudaming/Pictures/emoji2/";
+	private static final String SAVE_DIR = "/Users/hudaming/Pictures/emoji/";
 
 	private BlockingQueue<String> URLS;
 
@@ -82,16 +87,24 @@ public class DownloadFactory implements Runnable {
 	private static final int WORK_COUNT = Runtime.getRuntime().availableProcessors() * 3;
 
 	public static void main(String[] args) throws IOException {
-		List<String> urls = readFiles("/Users/hudaming/Workspace/GitHub/MyTest/src/main/java/org/hum/download.txt");
-		new DownloadFactory(urls, WORK_COUNT).run();
+//		List<String> urls = readFiles("/Users/hudaming/Workspace/GitHub/MyTest/src/main/java/org/hum/download.txt");
+//		new DownloadFactory(urls, WORK_COUNT).run();
 	}
 
-	private static final HttpClient client = HttpClients.custom().setMaxConnPerRoute(Integer.MAX_VALUE).setMaxConnTotal(Integer.MAX_VALUE).build();
+	private static final HttpClient client = HttpClients.custom().setMaxConnPerRoute(Integer.MAX_VALUE).setSSLHostnameVerifier(new HostnameVerifier() {
+		@Override
+		public boolean verify(String arg0, SSLSession arg1) {
+			return true;
+		}
+	}).setMaxConnTotal(Integer.MAX_VALUE).build();
 	private static final RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(30000)
 			.setConnectionRequestTimeout(60000).setSocketTimeout(60000).build();
 
-	public static void download(String gifUrl, String fileName) throws IOException {
+	public static void download(String gifUrl, String fileName) {
 		try {
+			if (new File(SAVE_DIR + fileName).exists()) {
+				return ;
+			}
 			HttpGet httpGet = new HttpGet(gifUrl);
 			// 设置请求
 			httpGet.setConfig(requestConfig);
@@ -112,7 +125,10 @@ public class DownloadFactory implements Runnable {
 			is.close();
 			fileout.flush();
 			fileout.close();
-			System.out.println("[" + Thread.currentThread().getName() + "]downloaded " + gifUrl);
+			// System.out.println("[" + Thread.currentThread().getName() + "]downloaded " + gifUrl);
+		} catch (SocketException | ConnectTimeoutException ignore) {
+			System.err.println("gifUrl:" + gifUrl + ", error:" + ignore.getMessage());
+			// ignore
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(gifUrl);

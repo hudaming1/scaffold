@@ -13,7 +13,7 @@ ClientAliveInterval 60
 
 ssh -o ServerAliveInterval=60 -o ServerAliveCountMax=360 -NfR  0.0.0.0:52996:10.1.143.145:20886 root@129.28.193.172
 
-ssh -o ServerAliveInterval=60 -o ServerAliveCountMax=360 -NfR  0.0.0.0:52996:10.254.160.253:3306 root@129.28.193.172
+ssh -o ServerAliveInterval=60 -o ServerAliveCountMax=360 -NfR  0.0.0.0:52007:idc01-smsshdM-mysql-00.dns.missfresh.cn:3306 root@129.28.193.172
 
 #### 踢出用户
 pkill -kill -t pts/0
@@ -45,3 +45,7 @@ sed -n '/2019-12-17 12:00:00/,/2019-12-17 12:10:10/p'  online.log
 ####jrebel
 http://jrebel.cicoding.cn/guid  
 http://jrebel.cicoding.cn/C2709474-8C0E-B086-C917-D8D6733C9EBC
+
+
+#### 启动参数
+-Xmx1024M -Xms1024M -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:+UseStringDeduplication -XX:-OmitStackTraceInFastThrow -XX:+UnlockCommercialFeatures -XX:+FlightRecorder  -server
